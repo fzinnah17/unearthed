@@ -18,11 +18,11 @@ const __dirname = dirname(__filename); // Get the directory name of the current 
 
 
 // Explicitly serve main.js
-app.get('/public/scripts/main.js', (req, res) => { //a middleware function to serve static files from the scripts directory.
-    const explicitPath = path.join(__dirname, '../client/public/scripts/main.js');
-    // console.log("Serving:", explicitPath);
-    res.sendFile(explicitPath);
-});
+// app.get('/public/scripts/main.js', (req, res) => { //a middleware function to serve static files from the scripts directory.
+//     const explicitPath = path.join(__dirname, '../client/public/scripts/main.js');
+//     // console.log("Serving:", explicitPath);
+//     res.sendFile(explicitPath);
+// });
 
 // Serve static files from the client directory
 app.use('/public', express.static(path.join(__dirname, '../client'))); //issue with scripts file in the public directory
