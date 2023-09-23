@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import giftsRouter from './routes/gifts.js'
+import './config/dotenv.js';
 
 
 const app = express(); //Initialize the Express app.
