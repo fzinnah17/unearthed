@@ -56,4 +56,14 @@ const renderGifts = async () => {
         mainContent.appendChild(message)
     }
 }
-renderGifts();
+const requestedUrl = window.location.pathname.split('/').slice(1);
+
+if (requestedUrl[0] === "gifts" && requestedUrl[1]) {
+    // Do nothing and let the server handle the routing.
+    // Optionally: You might want to fetch gift details here in the future.
+} else if (requestedUrl[0] === "" || requestedUrl[0] === "index.html") {
+    renderGifts();
+} else {
+    window.location.href = '../404.html';
+}
+
