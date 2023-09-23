@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import giftsRouter from './routes/gifts.js'
+
 
 const app = express(); //Initialize the Express app.
 
@@ -13,6 +15,7 @@ const __dirname = dirname(__filename); // Get the directory name of the current 
 //     console.log("Request URL:", req.url);
 //     next();
 // });
+
 
 // Explicitly serve main.js
 app.get('/public/scripts/main.js', (req, res) => { //a middleware function to serve static files from the scripts directory.
@@ -31,6 +34,10 @@ app.use('/public', express.static(path.join(__dirname, '../client'))); //issue w
 
 // a route for the root URL of the server with parameters req and res to help us quickly see that our server is working 
 // and responding correctly when we start it.
+
+app.use('/gifts', giftsRouter)
+
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'));
 });
