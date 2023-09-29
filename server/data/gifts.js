@@ -2,7 +2,7 @@ const giftData = [
     {
         _id: 1,
         name: "Sample Gift 1",
-        pricePoint: "$20-$30",
+        pricePoint: "20",
         audience: "Adults",
         image: "path_to_image_1.jpg",
         description: "This is a sample gift description for the first gift.",
@@ -12,7 +12,7 @@ const giftData = [
       {
         _id: 2,
         name: "Sample Gift 2",
-        pricePoint: "$10-$20",
+        pricePoint: "10",
         audience: "Kids",
         image: "path_to_image_2.jpg",
         description: "This is a sample gift description for the second gift.",
