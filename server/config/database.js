@@ -1,11 +1,12 @@
-import pg from 'pg'
+import { MongoClient } from 'mongodb';
+import './dotenv.js';
 
-const config = {
-    user: process.env.PGUSER,
-    password: process.env.PGPASSWORD,
-    host: process.env.PGHOST,
-    port: process.env.PGPORT,
-    database: process.env.PGDATABASE
-};
+const mongoUri = process.env.MONGO_URI;
+const dbName = process.env.DB_NAME;
 
-export const pool = new pg.Pool(config);
+const client = new MongoClient(mongoUri, { useUnifiedTopology: true });
+
+export async function connectToDatabase() {
+    if (!client.isConnected()) await client.connect();
+    return client.db(dbName);
+}

@@ -1,6 +1,6 @@
 const giftData = [
     {
-        id: 1,
+        _id: 1,
         name: "Sample Gift 1",
         pricePoint: "$20-$30",
         audience: "Adults",
@@ -10,7 +10,7 @@ const giftData = [
         submittedOn: "2023-09-22"
       },
       {
-        id: 2,
+        _id: 2,
         name: "Sample Gift 2",
         pricePoint: "$10-$20",
         audience: "Kids",
