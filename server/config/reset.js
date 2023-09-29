@@ -60,24 +60,36 @@
 // reset.js
 
 // import giftData from '../data/gifts.js';           // Ensure this path is correct
-import { connectToDatabase } from './database.js';
+import { MongoClient } from 'mongodb';
 import giftData from '../data/gifts.js';
 
+// MongoDB connection details
+const mongoUri = process.env.MONGO_URI;
+const dbName = process.env.DB_NAME;
 
-async function seedDatabase() {
-    const db = await connectToDatabase();       // Connect to MongoDB
-    const collection = db.collection('gifts');
+const client = new MongoClient(mongoUri, { useUnifiedTopology: true });
 
-    // Drop the existing 'gifts' collection
-    await collection.drop().catch(err => console.log('No existing collection to drop'));
-
-    // Insert sample gift data
+const seedGiftsCollection = async () => {
     try {
-        await collection.insertMany(giftData);
-        console.log('🎉 gifts data inserted successfully');
-    } catch (err) {
-        console.error('⚠️ error inserting gift data', err);
-    }
-}
+        await client.connect();
+        const db = client.db(dbName);
+        const collection = db.collection('gifts');
 
-seedDatabase();
+        // Drop collection if it exists
+        if (await collection.countDocuments({}) !== 0) {
+            await collection.drop();
+            console.log('🎉 gifts collection dropped');
+        }
+
+        // Insert the giftData into the collection
+        await collection.insertMany(giftData);
+        console.log('🎉 gifts collection seeded successfully');
+    } catch (err) {
+        console.error('⚠️ error seeding gifts collection', err);
+    } finally {
+        await client.close();
+    }
+};
+
+seedGiftsCollection();
+
