@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -8,30 +9,18 @@ import './config/dotenv.js';
 
 const app = express(); //Initialize the Express app.
 
+// cors middleware.
+app.use(cors());
+
 const __filename = fileURLToPath(import.meta.url); // Get the filename of the current module
 const __dirname = dirname(__filename); // Get the directory name of the current module
 
-// To check the requested URLs.
-// app.use((req, res, next) => {
-//     console.log("Request URL:", req.url);
-//     next();
-// });
-
-// Serve static files from the client directory
-app.use('/public', express.static(path.join(__dirname, '../client'))); //issue with scripts file in the public directory
-//a middleware function to serve static files from the public directory.
-
-// app.use('/public/scripts', express.static(path.join(__dirname, '../client/scripts')));
-
-// a route for the root URL of the server with parameters req and res to help us quickly see that our server is working 
-// and responding correctly when we start it.
 
 app.use('/gifts', giftsRouter)
 
-
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-});
+    res.status(200).send('<h1 style="text-align: center; margin-top: 50px;">UnEarthed API</h1>')
+  })
 
 //Start a server on port process.env.PORT or 3001.
 const PORT = process.env.PORT || 3001;
