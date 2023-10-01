@@ -19,6 +19,16 @@ const giftData = [
         submittedBy: "Jane Smith",
         submittedOn: "2023-09-21"
       },
+      {
+        _id: 3,
+        name: "Sample Gift 2",
+        pricePoint: "10",
+        audience: "Kids",
+        image: "path_to_image_2.jpg",
+        description: "This is a sample gift description for the second gift.",
+        submittedBy: "Jane Smith",
+        submittedOn: "2023-09-21"
+      },
 ];
 export default giftData;
 
